@@ -1,0 +1,10 @@
+{
+  "name": "Habit Ring",
+  "short_name": "HabitRing",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f7f3",
+  "theme_color": "#f28a45",
+  "description": "A responsive 30-day circular habit tracker."
+}
