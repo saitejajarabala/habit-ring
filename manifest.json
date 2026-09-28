@@ -4,7 +4,7 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f6f6f2",
-  "theme_color": "#f28a45",
-  "description": "Track personal habits, research, coursework, work and project progress with multiple circular progress rings."
+  "background_color": "#050816",
+  "theme_color": "#0b1020",
+  "description": "Premium sci-fi themed multi-project radial progress tracker."
 }
