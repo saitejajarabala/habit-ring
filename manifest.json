@@ -1,10 +1,10 @@
 {
-  "name": "Progress Ring",
-  "short_name": "ProgressRing",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#050816",
-  "theme_color": "#0b1020",
-  "description": "Premium sci-fi themed multi-project radial progress tracker."
+  "name":"Progress Ring",
+  "short_name":"ProgressRing",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#050816",
+  "theme_color":"#07101f",
+  "description":"Animated multi-project progress tracker with adaptive themes, streak analytics and dashboard charts."
 }
