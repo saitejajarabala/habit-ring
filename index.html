@@ -1,144 +1,125 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f28a45">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>Habit Ring</title>
-  <link rel="manifest" href="./manifest.json">
-  <style>
-    :root{--bg:#f7f7f3;--card:#fff;--ink:#161616;--muted:#72726d;--line:#deded6;--accent:#f28a45;--accent-soft:#fff0e4;--done:#9bd36a;--danger:#c85a5a;--shadow:0 14px 42px rgba(30,30,20,.07)}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    button,input,select{font:inherit}.hidden{display:none!important}.shell{min-height:100vh}
-    header{position:sticky;top:0;z-index:30;background:rgba(247,247,243,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-    .head{max-width:1180px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:850}.mark{width:38px;height:38px;border-radius:12px;background:var(--accent);display:grid;place-items:center;font-weight:900}
-    .head-actions{display:flex;gap:8px;align-items:center}.btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 13px;font-weight:700;cursor:pointer}
-    .btn.primary{background:var(--accent);border-color:var(--accent);color:#17120f}.btn.danger{color:#9f3434;border-color:#efcaca}
-    nav{max-width:1180px;margin:auto;padding:0 18px 12px;display:flex;gap:8px;overflow:auto}.tab{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;cursor:pointer}.tab.active{background:#171717;color:#fff;border-color:#171717}
-    main{max-width:1180px;margin:auto;padding:20px 18px 34px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.c4{grid-column:span 4}.c8{grid-column:span 8}.c12{grid-column:span 12}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 4px 18px rgba(20,20,10,.025)} h1,h2,h3,p{margin-top:0}
-    .eyebrow{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:800}.big{font-size:30px;font-weight:900}.sub{font-size:13px;color:var(--muted)}
-    .progress{height:10px;background:#eeeeea;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:var(--accent);width:0}
-    .today-list{display:grid;gap:10px}.habit{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--line);border-radius:15px;padding:12px}
-    .habit-name{font-weight:800}.habit-meta{font-size:12px;color:var(--muted)}.check{width:44px;height:44px;border-radius:13px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:20px;font-weight:900}.check.done{background:var(--done);border-color:var(--done)}
-    .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px}.toolbar select{width:auto;min-width:170px}
-    input,select{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;outline:none}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-    .ringbox{overflow:auto;-webkit-overflow-scrolling:touch}.ringbox svg{display:block;margin:auto;max-width:100%;height:auto;min-width:650px}.cell{cursor:pointer;transition:.12s}.cell:hover{filter:brightness(.95)}
-    .legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:10px}.swatch{display:inline-block;width:11px;height:11px;border:1px solid #aaa;border-radius:3px;margin-right:5px;vertical-align:-1px}
-    .stat-row{display:grid;grid-template-columns:140px 1fr 48px;gap:10px;align-items:center;margin:12px 0}.editor-row{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:center;margin-bottom:10px}.num{text-align:center;font-weight:900}
-    .notice{background:var(--accent-soft);border:1px solid #ffd5b7;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.45}.stack{display:grid;gap:10px}
-    .install{display:flex;gap:10px;flex-wrap:wrap}.tiny{font-size:12px;color:var(--muted);line-height:1.45}
-    @media(max-width:820px){.c4,.c8{grid-column:span 12}.head{padding:10px 14px}nav{padding:0 14px 10px}main{padding:14px}.card{padding:14px;border-radius:17px}.big{font-size:26px}.ringbox svg{min-width:590px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f28a45"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>Progress Ring</title><link rel="manifest" href="./manifest.json">
+<style>
+:root{--bg:#f6f6f2;--card:#fff;--ink:#181818;--muted:#73736d;--line:#deded7;--accent:#f28a45;--soft:#fff0e4;--done:#9bd36a;--blue:#9fc5ff;--shadow:0 10px 34px rgba(30,30,20,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit}.hidden{display:none!important}header{position:sticky;top:0;z-index:30;background:rgba(246,246,242,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.head{max-width:1200px;margin:auto;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{display:flex;align-items:center;gap:11px;font-weight:900}.mark{width:40px;height:40px;border-radius:13px;background:var(--accent);display:grid;place-items:center}.muted{color:var(--muted);font-size:13px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 13px;font-weight:750;cursor:pointer}.btn.primary{background:var(--accent);border-color:var(--accent)}.btn.danger{color:#a33;border-color:#efc1c1}
+nav{max-width:1200px;margin:auto;padding:0 18px 12px;display:flex;gap:8px;overflow:auto}.tab{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;cursor:pointer}.tab.active{background:#181818;color:#fff;border-color:#181818}
+main{max-width:1200px;margin:auto;padding:20px 18px 40px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 4px 18px rgba(20,20,10,.025)}h1,h2,h3,p{margin-top:0}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}.big{font-size:30px;font-weight:900}
+input,select{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;outline:none}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--soft)}
+.project-card{cursor:pointer;transition:.14s}.project-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.project-card.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--soft)}
+.badge{display:inline-flex;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;background:#f0f0ec;color:#555}.progress{height:10px;background:#ecece7;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:var(--accent)}
+.list{display:grid;gap:10px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px}.row strong{display:block}.check{width:43px;height:43px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:20px;font-weight:900;cursor:pointer}.check.done{background:var(--done);border-color:var(--done)}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.toolbar-group{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ringbox{overflow:auto;-webkit-overflow-scrolling:touch}.ringbox svg{display:block;margin:auto;max-width:100%;height:auto;min-width:620px}.cell{cursor:pointer}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px}.swatch{display:inline-block;width:11px;height:11px;border:1px solid #aaa;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.editor{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:center;margin-bottom:9px}.num{text-align:center;font-weight:900}.statrow{display:grid;grid-template-columns:minmax(120px,220px) 1fr 52px;gap:10px;align-items:center;margin:12px 0}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.notice{background:var(--soft);border:1px solid #ffd5b7;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5}
+@media(max-width:850px){.c3,.c4,.c6,.c8{grid-column:span 12}.formgrid{grid-template-columns:1fr}.head{padding:10px 14px}nav{padding:0 14px 10px}main{padding:14px}.ringbox svg{min-width:570px}.statrow{grid-template-columns:110px 1fr 45px}}
+</style>
 </head>
 <body>
-<div class="shell">
 <header>
-  <div class="head">
-    <div class="brand"><div class="mark">HR</div><div><div>Habit Ring</div><div class="sub">30-day habit tracker</div></div></div>
-    <div class="head-actions"><button class="btn" id="installBtn" style="display:none">Install app</button></div>
-  </div>
-  <nav>
-    <button class="tab active" data-page="today" onclick="showPage('today',this)">Today</button>
-    <button class="tab" data-page="tracker" onclick="showPage('tracker',this)">Monthly Tracker</button>
-    <button class="tab" data-page="dashboard" onclick="showPage('dashboard',this)">Dashboard</button>
-    <button class="tab" data-page="habits" onclick="showPage('habits',this)">Manage Habits</button>
-    <button class="tab" data-page="backup" onclick="showPage('backup',this)">Backup</button>
-  </nav>
+<div class="head"><div class="brand"><div class="mark">PR</div><div><div>Progress Ring</div><div class="muted">Track habits, research, work and projects</div></div></div><button class="btn" id="installBtn" style="display:none">Install app</button></div>
+<nav>
+<button class="tab active" onclick="showPage('home',this)">Home</button>
+<button class="tab" onclick="showPage('ring',this)">Progress Ring</button>
+<button class="tab" onclick="showPage('projects',this)">Projects</button>
+<button class="tab" onclick="showPage('analytics',this)">Analytics</button>
+<button class="tab" onclick="showPage('settings',this)">Settings</button>
+</nav>
 </header>
-
 <main>
-<section id="page-today" class="page">
-  <div class="grid">
-    <div class="card c4"><div class="eyebrow">Today</div><div class="big" id="todayDate"></div><div class="sub" id="todayMonth"></div></div>
-    <div class="card c4"><div class="eyebrow">Completed today</div><div class="big" id="todayCount">0 / 9</div><div class="progress"><div id="todayProgress"></div></div></div>
-    <div class="card c4"><div class="eyebrow">Month completion</div><div class="big" id="monthPct">0%</div><div class="sub">Across all 9 habits</div></div>
-    <div class="card c12"><h2>Today's habits</h2><div id="todayHabits" class="today-list"></div></div>
-  </div>
+<section id="page-home" class="page">
+<div class="grid">
+<div class="card c3"><div class="eyebrow">Today</div><div class="big" id="todayDate"></div><div class="muted" id="todayMonth"></div></div>
+<div class="card c3"><div class="eyebrow">Active ring</div><div class="big" id="activeName" style="font-size:20px"></div><div class="muted" id="activeType"></div></div>
+<div class="card c3"><div class="eyebrow">Today complete</div><div class="big" id="todayCount">0 / 9</div><div class="progress"><div id="todayProgress" style="width:0"></div></div></div>
+<div class="card c3"><div class="eyebrow">Month completion</div><div class="big" id="monthPct">0%</div><div class="muted">Current active ring</div></div>
+<div class="card c8"><div class="toolbar"><div><h2 style="margin-bottom:4px">Today's progress</h2><div class="muted">Complete items for the active project.</div></div><select id="homeProject" onchange="selectProject(this.value)"></select></div><div id="todayList" class="list"></div></div>
+<div class="card c4"><h2>Your rings</h2><div id="homeProjects" class="list"></div></div>
+</div>
 </section>
 
-<section id="page-tracker" class="page hidden">
-  <div class="card">
-    <div class="toolbar">
-      <div><h2 style="margin-bottom:4px">Monthly Tracker</h2><div class="sub">Tap a ring cell to mark that habit complete for the selected day.</div></div>
-      <select id="monthSelect" onchange="changeMonth()"></select>
-    </div>
-    <div class="ringbox"><svg id="ring" viewBox="0 0 900 900" aria-label="Circular monthly habit tracker"></svg></div>
-    <div class="legend"><span><span class="swatch" style="background:var(--done)"></span>Complete</span><span><span class="swatch" style="background:#fff"></span>Not complete</span></div>
-  </div>
+<section id="page-ring" class="page hidden">
+<div class="card">
+<div class="toolbar"><div><h2 style="margin-bottom:4px" id="ringTitle">Progress Ring</h2><div class="muted">Each ring band is one goal. Tap cells to record progress.</div></div><div class="toolbar-group"><select id="ringProject" onchange="selectProject(this.value)"></select><select id="monthSelect" onchange="changeMonth()"></select></div></div>
+<div class="ringbox"><svg id="ring" viewBox="0 0 900 900"></svg></div>
+<div class="legend"><span><span class="swatch" style="background:var(--done)"></span>Complete</span><span><span class="swatch" style="background:#fff"></span>Not complete</span></div>
+</div>
 </section>
 
-<section id="page-dashboard" class="page hidden">
-  <div class="grid">
-    <div class="card c4"><div class="eyebrow">Overall</div><div class="big" id="dashOverall">0%</div></div>
-    <div class="card c4"><div class="eyebrow">Best habit</div><div class="big" id="bestHabit" style="font-size:19px">—</div></div>
-    <div class="card c4"><div class="eyebrow">Best day</div><div class="big" id="bestDay" style="font-size:19px">—</div></div>
-    <div class="card c12"><h2>Habit completion</h2><div id="habitStats"></div></div>
-  </div>
+<section id="page-projects" class="page hidden">
+<div class="grid">
+<div class="card c4"><h2>Create a new ring</h2><div class="formgrid"><div><div class="muted">Name</div><input id="newName" placeholder="Example: APEC Paper" style="width:100%"></div><div><div class="muted">Type</div><select id="newType" style="width:100%"><option>Research</option><option>Work</option><option>Personal</option><option>Coursework</option><option>Project</option><option>Health</option></select></div></div><button class="btn primary" style="margin-top:12px" onclick="createProject()">Create ring</button></div>
+<div class="card c8"><h2>All projects & rings</h2><div id="projectGrid" class="grid"></div></div>
+<div class="card c12"><h2>Edit active ring goals</h2><p class="muted">These 9 rows become the 9 concentric bands in the tracker.</p><div id="goalEditor"></div><button class="btn primary" onclick="saveGoals()">Save goals</button></div>
+</div>
 </section>
 
-<section id="page-habits" class="page hidden">
-  <div class="card">
-    <h2>Manage Habits</h2>
-    <p class="sub">Use up to nine habits so the circular tracker stays readable.</p>
-    <div id="habitEditor"></div>
-    <button class="btn primary" onclick="saveHabits()">Save habits</button>
-  </div>
+<section id="page-analytics" class="page hidden">
+<div class="grid">
+<div class="card c4"><div class="eyebrow">Active ring</div><div class="big" id="analyticsProject" style="font-size:20px"></div></div>
+<div class="card c4"><div class="eyebrow">Overall this month</div><div class="big" id="analyticsOverall">0%</div></div>
+<div class="card c4"><div class="eyebrow">Best goal</div><div class="big" id="bestGoal" style="font-size:19px">—</div></div>
+<div class="card c12"><h2>Goal completion</h2><div id="goalStats"></div></div>
+<div class="card c12"><h2>Portfolio overview</h2><div id="portfolioStats"></div></div>
+</div>
 </section>
 
-<section id="page-backup" class="page hidden">
-  <div class="grid">
-    <div class="card c8">
-      <h2>Backup & transfer</h2>
-      <div class="notice">This GitHub Pages version stores your tracking data on the current device. It is fully usable, but automatic phone ↔ laptop synchronization needs a database/login backend such as Supabase. I have not used a fake cloud login.</div>
-      <div class="install" style="margin-top:14px">
-        <button class="btn" onclick="exportData()">Export JSON</button>
-        <label class="btn" style="cursor:pointer">Import JSON<input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)"></label>
-        <button class="btn danger" onclick="resetData()">Reset data</button>
-      </div>
-    </div>
-    <div class="card c4">
-      <h3>Phone use</h3>
-      <p class="tiny">Open the site in Safari or Chrome and use “Add to Home Screen” / “Install app” to make it behave like a lightweight app.</p>
-    </div>
-  </div>
+<section id="page-settings" class="page hidden">
+<div class="grid">
+<div class="card c8"><h2>Backup & portability</h2><div class="notice">Progress Ring currently saves data on this device. Export/import lets you move data manually. Automatic phone ↔ laptop sync and real accounts can be added next with Supabase.</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn" onclick="exportData()">Export backup</button><label class="btn" style="cursor:pointer">Import backup<input type="file" hidden accept="application/json" onchange="importData(event)"></label><button class="btn danger" onclick="resetAll()">Reset all</button></div></div>
+<div class="card c4"><h2>App structure</h2><div class="muted">Use separate rings for research papers, coursework, lab work, job tasks, personal habits, fitness, or any project that needs recurring progress tracking.</div></div>
+</div>
 </section>
 </main>
-</div>
-
 <script>
-const DEFAULT_HABITS=["10K Steps","8 Hours Sleep","No Junk Food","Workout","Protein Intake","No Sugar","No Late Night Snacking","15–20 Min Sunlight","Learn Something"];
-let state=JSON.parse(localStorage.getItem("habitRingData")||"null")||{habits:[...DEFAULT_HABITS],records:{}};
+const DEFAULTS=[
+{id:"personal",name:"Personal Habits",type:"Personal",goals:["10K Steps","8 Hours Sleep","No Junk Food","Workout","Protein Intake","No Sugar","No Late Night Snacking","15–20 Min Sunlight","Learn Something"],records:{}},
+{id:"research",name:"Research Progress",type:"Research",goals:["Literature Review","MATLAB / Simulation","Analyze Results","Update Figures","Write Manuscript","Check References","Advisor Notes","Experiment / Validation","Daily Research Notes"],records:{}},
+{id:"coursework",name:"Coursework",type:"Coursework",goals:["Review Lecture","Read Notes","Practice Problems","MATLAB / Coding","Assignment Progress","Quiz Preparation","Formula Review","Ask / Resolve Doubts","Weekly Revision"],records:{}},
+{id:"projects",name:"Project Work",type:"Project",goals:["Plan Next Task","Development","Testing","Documentation","Dataset / Inputs","Analysis","Meeting Follow-up","GitHub Update","Daily Summary"],records:{}}
+];
+let state=JSON.parse(localStorage.getItem("progressRingData")||"null")||{projects:DEFAULTS,active:"personal"};
+if(!state.projects||!state.projects.length)state={projects:DEFAULTS,active:"personal"};
 let activeMonth=monthKey(new Date());
+function persist(){localStorage.setItem("progressRingData",JSON.stringify(state))}
+function project(){return state.projects.find(p=>p.id===state.active)||state.projects[0]}
 function monthKey(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")}
 function daysInMonth(k){const [y,m]=k.split("-").map(Number);return new Date(y,m,0).getDate()}
-function key(m,h,d){return m+"|"+h+"|"+d}
-function done(m,h,d){return !!state.records[key(m,h,d)]}
-function setDone(m,h,d,v){if(v)state.records[key(m,h,d)]=true;else delete state.records[key(m,h,d)];persist();renderAll()}
-function persist(){localStorage.setItem("habitRingData",JSON.stringify(state))}
+function recKey(m,g,d){return m+"|"+g+"|"+d}
+function isDone(p,m,g,d){return !!p.records[recKey(m,g,d)]}
+function setDone(m,g,d,v){const p=project();if(v)p.records[recKey(m,g,d)]=true;else delete p.records[recKey(m,g,d)];persist();renderAll()}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function showPage(n,b){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById("page-"+n).classList.remove("hidden");document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));if(b)b.classList.add("active");if(n==="tracker")drawRing();if(n==="dashboard")renderDashboard();if(n==="habits")renderEditor()}
+function showPage(n,b){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById("page-"+n).classList.remove("hidden");document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));if(b)b.classList.add("active");renderAll()}
 function buildMonths(){const s=document.getElementById("monthSelect");s.innerHTML="";const now=new Date();for(let o=-12;o<=12;o++){const d=new Date(now.getFullYear(),now.getMonth()+o,1),k=monthKey(d),op=document.createElement("option");op.value=k;op.textContent=d.toLocaleDateString(undefined,{month:"long",year:"numeric"});if(k===activeMonth)op.selected=true;s.appendChild(op)}}
 function changeMonth(){activeMonth=document.getElementById("monthSelect").value;renderAll()}
-function overallPct(m){let total=daysInMonth(m)*state.habits.length,c=0;for(let h=0;h<state.habits.length;h++)for(let d=1;d<=daysInMonth(m);d++)if(done(m,h,d))c++;return total?Math.round(c/total*100):0}
-function renderToday(){const dt=new Date(),m=monthKey(dt),day=dt.getDate();document.getElementById("todayDate").textContent=dt.toLocaleDateString(undefined,{weekday:"long",day:"numeric"});document.getElementById("todayMonth").textContent=dt.toLocaleDateString(undefined,{month:"long",year:"numeric"});let count=0;const w=document.getElementById("todayHabits");w.innerHTML="";state.habits.forEach((h,i)=>{const v=done(m,i,day);if(v)count++;const r=document.createElement("div");r.className="habit";r.innerHTML='<div><div class="habit-name">'+esc(h)+'</div><div class="habit-meta">Habit '+(i+1)+'</div></div><button class="check '+(v?'done':'')+'" aria-label="Toggle '+esc(h)+'">'+(v?'✓':'')+'</button>';r.querySelector("button").onclick=()=>setDone(m,i,day,!v);w.appendChild(r)});document.getElementById("todayCount").textContent=count+" / "+state.habits.length;document.getElementById("todayProgress").style.width=(count/state.habits.length*100)+"%";document.getElementById("monthPct").textContent=overallPct(m)+"%"}
+function selectProject(id){state.active=id;persist();renderAll()}
+function fillProjectSelect(id){const s=document.getElementById(id);if(!s)return;s.innerHTML="";state.projects.forEach(p=>{const o=document.createElement("option");o.value=p.id;o.textContent=p.name;if(p.id===state.active)o.selected=true;s.appendChild(o)})}
+function completion(p,m){let total=daysInMonth(m)*p.goals.length,c=0;for(let g=0;g<p.goals.length;g++)for(let d=1;d<=daysInMonth(m);d++)if(isDone(p,m,g,d))c++;return total?Math.round(c/total*100):0}
+function renderHome(){const d=new Date(),m=monthKey(d),day=d.getDate(),p=project();document.getElementById("todayDate").textContent=d.toLocaleDateString(undefined,{weekday:"long",day:"numeric"});document.getElementById("todayMonth").textContent=d.toLocaleDateString(undefined,{month:"long",year:"numeric"});document.getElementById("activeName").textContent=p.name;document.getElementById("activeType").textContent=p.type;let c=0,w=document.getElementById("todayList");w.innerHTML="";p.goals.forEach((g,i)=>{const v=isDone(p,m,i,day);if(v)c++;const r=document.createElement("div");r.className="row";r.innerHTML='<div><strong>'+esc(g)+'</strong><span class="muted">Goal '+(i+1)+'</span></div><button class="check '+(v?'done':'')+'">'+(v?'✓':'')+'</button>';r.querySelector("button").onclick=()=>setDone(m,i,day,!v);w.appendChild(r)});document.getElementById("todayCount").textContent=c+" / "+p.goals.length;document.getElementById("todayProgress").style.width=(c/p.goals.length*100)+"%";document.getElementById("monthPct").textContent=completion(p,m)+"%";const hp=document.getElementById("homeProjects");hp.innerHTML="";state.projects.forEach(x=>{const r=document.createElement("div");r.className="row";r.innerHTML='<div><strong>'+esc(x.name)+'</strong><span class="muted">'+esc(x.type)+'</span></div><strong>'+completion(x,m)+'%</strong>';r.onclick=()=>selectProject(x.id);hp.appendChild(r)})}
 function polar(cx,cy,r,a){const z=(a-90)*Math.PI/180;return{x:cx+r*Math.cos(z),y:cy+r*Math.sin(z)}}
-function arc(cx,cy,r1,r2,a1,a2){const p1=polar(cx,cy,r2,a1),p2=polar(cx,cy,r2,a2),p3=polar(cx,cy,r1,a2),p4=polar(cx,cy,r1,a1),large=(a2-a1)>180?1:0;return 'M '+p1.x+' '+p1.y+' A '+r2+' '+r2+' 0 '+large+' 1 '+p2.x+' '+p2.y+' L '+p3.x+' '+p3.y+' A '+r1+' '+r1+' 0 '+large+' 0 '+p4.x+' '+p4.y+' Z'}
-function svgEl(n,a={}){const e=document.createElementNS("http://www.w3.org/2000/svg",n);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));return e}
-function drawRing(){const s=document.getElementById("ring");if(!s)return;s.innerHTML="";const n=daysInMonth(activeMonth),cx=450,cy=450,inner=128,band=27,gap=1.2;for(let h=0;h<state.habits.length;h++){const r1=inner+h*band,r2=r1+band-2;for(let d=1;d<=n;d++){const a1=(d-1)*360/n+gap/2,a2=d*360/n-gap/2,p=svgEl("path",{d:arc(cx,cy,r1,r2,a1,a2),fill:done(activeMonth,h,d)?"#9bd36a":"#fff",stroke:"#bcbcb5","stroke-width":"1",class:"cell"});p.onclick=()=>setDone(activeMonth,h,d,!done(activeMonth,h,d));s.appendChild(p)}}const outer=inner+state.habits.length*band+19;for(let d=1;d<=n;d++){const p=polar(cx,cy,outer,(d-.5)*360/n),t=svgEl("text",{x:p.x,y:p.y,"text-anchor":"middle","dominant-baseline":"middle","font-size":"13","font-weight":"800"});t.textContent=d;s.appendChild(t)}const c=svgEl("circle",{cx,cy,r:inner-9,fill:"#fff",stroke:"#171717","stroke-width":"2"});s.appendChild(c);const date=new Date(activeMonth+"-01T12:00:00"),t=svgEl("text",{x:cx,y:cy-8,"text-anchor":"middle","font-size":"23","font-weight":"900"});t.textContent=date.toLocaleDateString(undefined,{month:"long"}).toUpperCase();s.appendChild(t);const y=svgEl("text",{x:cx,y:cy+24,"text-anchor":"middle","font-size":"18"});y.textContent=date.getFullYear();s.appendChild(y)}
-function renderDashboard(){document.getElementById("dashOverall").textContent=overallPct(activeMonth)+"%";const n=daysInMonth(activeMonth),stats=state.habits.map((h,i)=>{let c=0;for(let d=1;d<=n;d++)if(done(activeMonth,i,d))c++;return{h,c,p:Math.round(c/n*100)}}),best=[...stats].sort((a,b)=>b.p-a.p)[0];document.getElementById("bestHabit").textContent=best?best.h+" ("+best.p+"%)":"—";let bd={d:0,c:-1};for(let d=1;d<=n;d++){let c=0;for(let h=0;h<state.habits.length;h++)if(done(activeMonth,h,d))c++;if(c>bd.c)bd={d,c}}document.getElementById("bestDay").textContent=bd.d?"Day "+bd.d+" ("+bd.c+"/"+state.habits.length+")":"—";const w=document.getElementById("habitStats");w.innerHTML="";stats.forEach(x=>{const r=document.createElement("div");r.className="stat-row";r.innerHTML='<strong>'+esc(x.h)+'</strong><div class="progress"><div style="width:'+x.p+'%"></div></div><strong>'+x.p+'%</strong>';w.appendChild(r)})}
-function renderEditor(){const w=document.getElementById("habitEditor");if(!w)return;w.innerHTML="";for(let i=0;i<9;i++){const r=document.createElement("div");r.className="editor-row";r.innerHTML='<div class="num">'+(i+1)+'</div><input id="habit-'+i+'" value="'+esc(state.habits[i]||("Habit "+(i+1)))+'">';w.appendChild(r)}}
-function saveHabits(){state.habits=[];for(let i=0;i<9;i++){const v=document.getElementById("habit-"+i).value.trim();state.habits.push(v||("Habit "+(i+1)))}persist();renderAll();alert("Habits saved.")}
-function exportData(){const b=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="habit-ring-backup.json";a.click();URL.revokeObjectURL(u)}
-function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!Array.isArray(x.habits)||typeof x.records!=="object")throw new Error();state=x;persist();renderAll();alert("Backup imported.");}catch{alert("That backup file is not valid.")}};r.readAsText(f)}
-function resetData(){if(confirm("Reset all habit names and tracking data?")){state={habits:[...DEFAULT_HABITS],records:{}};persist();renderAll()}}
-function renderAll(){renderToday();drawRing();renderDashboard();renderEditor()}
+function arc(cx,cy,r1,r2,a1,a2){const p1=polar(cx,cy,r2,a1),p2=polar(cx,cy,r2,a2),p3=polar(cx,cy,r1,a2),p4=polar(cx,cy,r1,a1),L=(a2-a1)>180?1:0;return'M '+p1.x+' '+p1.y+' A '+r2+' '+r2+' 0 '+L+' 1 '+p2.x+' '+p2.y+' L '+p3.x+' '+p3.y+' A '+r1+' '+r1+' 0 '+L+' 0 '+p4.x+' '+p4.y+' Z'}
+function se(n,a={}){const e=document.createElementNS("http://www.w3.org/2000/svg",n);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));return e}
+function drawRing(){const s=document.getElementById("ring");if(!s)return;s.innerHTML="";const p=project(),n=daysInMonth(activeMonth),cx=450,cy=450,inner=128,band=27,gap=1.2;for(let g=0;g<p.goals.length;g++){const r1=inner+g*band,r2=r1+band-2;for(let d=1;d<=n;d++){const q=se("path",{d:arc(cx,cy,r1,r2,(d-1)*360/n+gap/2,d*360/n-gap/2),fill:isDone(p,activeMonth,g,d)?"#9bd36a":"#fff",stroke:"#bcbcb5","stroke-width":"1",class:"cell"});q.onclick=()=>setDone(activeMonth,g,d,!isDone(p,activeMonth,g,d));s.appendChild(q)}}const outer=inner+p.goals.length*band+19;for(let d=1;d<=n;d++){const q=polar(cx,cy,outer,(d-.5)*360/n),t=se("text",{x:q.x,y:q.y,"text-anchor":"middle","dominant-baseline":"middle","font-size":"13","font-weight":"800"});t.textContent=d;s.appendChild(t)}s.appendChild(se("circle",{cx,cy,r:inner-9,fill:"#fff",stroke:"#181818","stroke-width":"2"}));const t=se("text",{x:cx,y:cy-18,"text-anchor":"middle","font-size":"19","font-weight":"900"});t.textContent=p.name.toUpperCase().slice(0,22);s.appendChild(t);const dt=new Date(activeMonth+"-01T12:00:00"),t2=se("text",{x:cx,y:cy+12,"text-anchor":"middle","font-size":"16","font-weight":"800"});t2.textContent=dt.toLocaleDateString(undefined,{month:"long"}).toUpperCase()+" "+dt.getFullYear();s.appendChild(t2);const t3=se("text",{x:cx,y:cy+40,"text-anchor":"middle","font-size":"14"});t3.textContent=completion(p,activeMonth)+"% COMPLETE";s.appendChild(t3);document.getElementById("ringTitle").textContent=p.name+" — Progress Ring"}
+function renderProjects(){const w=document.getElementById("projectGrid");w.innerHTML="";state.projects.forEach(p=>{const c=document.createElement("div");c.className="card c6 project-card "+(p.id===state.active?"active":"");c.innerHTML='<span class="badge">'+esc(p.type)+'</span><h3 style="margin:10px 0 5px">'+esc(p.name)+'</h3><div class="muted">'+p.goals.length+' tracked goals</div><div class="progress" style="margin:12px 0"><div style="width:'+completion(p,activeMonth)+'%"></div></div><div style="display:flex;justify-content:space-between;align-items:center"><strong>'+completion(p,activeMonth)+'%</strong><button class="btn '+(state.projects.length>1?'danger':'')+'">'+(state.projects.length>1?'Delete':'Active')+'</button></div>';c.onclick=e=>{if(e.target.tagName==="BUTTON"&&state.projects.length>1){e.stopPropagation();deleteProject(p.id)}else selectProject(p.id)};w.appendChild(c)});const ed=document.getElementById("goalEditor");ed.innerHTML="";project().goals.forEach((g,i)=>{const r=document.createElement("div");r.className="editor";r.innerHTML='<div class="num">'+(i+1)+'</div><input id="goal-'+i+'" value="'+esc(g)+'">';ed.appendChild(r)})}
+function createProject(){const n=document.getElementById("newName").value.trim(),t=document.getElementById("newType").value;if(!n){alert("Enter a project name.");return}const id="p"+Date.now();state.projects.push({id,name:n,type:t,goals:["Goal 1","Goal 2","Goal 3","Goal 4","Goal 5","Goal 6","Goal 7","Goal 8","Goal 9"],records:{}});state.active=id;document.getElementById("newName").value="";persist();renderAll()}
+function deleteProject(id){if(!confirm("Delete this ring and its progress data?"))return;state.projects=state.projects.filter(p=>p.id!==id);if(state.active===id)state.active=state.projects[0].id;persist();renderAll()}
+function saveGoals(){const p=project();p.goals=[];for(let i=0;i<9;i++){const e=document.getElementById("goal-"+i);p.goals.push(e&&e.value.trim()?e.value.trim():"Goal "+(i+1))}persist();renderAll();alert("Goals saved.")}
+function renderAnalytics(){const p=project(),n=daysInMonth(activeMonth);document.getElementById("analyticsProject").textContent=p.name;document.getElementById("analyticsOverall").textContent=completion(p,activeMonth)+"%";const stats=p.goals.map((g,i)=>{let c=0;for(let d=1;d<=n;d++)if(isDone(p,activeMonth,i,d))c++;return{g,pct:Math.round(c/n*100)}}),best=[...stats].sort((a,b)=>b.pct-a.pct)[0];document.getElementById("bestGoal").textContent=best?best.g+" ("+best.pct+"%)":"—";const w=document.getElementById("goalStats");w.innerHTML="";stats.forEach(x=>{const r=document.createElement("div");r.className="statrow";r.innerHTML='<strong>'+esc(x.g)+'</strong><div class="progress"><div style="width:'+x.pct+'%"></div></div><strong>'+x.pct+'%</strong>';w.appendChild(r)});const q=document.getElementById("portfolioStats");q.innerHTML="";state.projects.forEach(x=>{const r=document.createElement("div");r.className="statrow";const pct=completion(x,activeMonth);r.innerHTML='<strong>'+esc(x.name)+'</strong><div class="progress"><div style="width:'+pct+'%"></div></div><strong>'+pct+'%</strong>';q.appendChild(r)})}
+function exportData(){const b=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="progress-ring-backup.json";a.click();URL.revokeObjectURL(u)}
+function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.projects||!x.active)throw 0;state=x;persist();renderAll();alert("Backup imported.");}catch{alert("Invalid backup file.")}};r.readAsText(f)}
+function resetAll(){if(confirm("Reset Progress Ring to the default projects?")){state={projects:JSON.parse(JSON.stringify(DEFAULTS)),active:"personal"};persist();renderAll()}}
+function renderAll(){fillProjectSelect("homeProject");fillProjectSelect("ringProject");renderHome();drawRing();renderProjects();renderAnalytics()}
 buildMonths();renderAll();
 let deferredPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;document.getElementById("installBtn").style.display="inline-block"});document.getElementById("installBtn").onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById("installBtn").style.display="none"};
-if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
+if("serviceWorker"in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
 </script>
-</body>
-</html>
+</body></html>
