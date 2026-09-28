@@ -1,4 +1,4 @@
-const CACHE="progress-ring-v3";
+const CACHE="progress-ring-premium-v5";
 const ASSETS=["./manifest.json"];
 
 self.addEventListener("install",event=>{
