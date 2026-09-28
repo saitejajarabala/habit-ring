@@ -1,33 +1,36 @@
-# Habit Ring
+# Progress Ring
 
-Responsive 30-day circular habit tracker for phone and laptop.
+Progress Ring is a responsive multi-project tracking app for phone and laptop.
 
-## Features
-- Nine editable habits
-- Daily completion screen
-- Circular monthly tracker
-- Monthly dashboard
-- Previous/next month selection
-- Local backup/import
+## What it supports
+- Multiple independent progress rings
+- Personal habits
+- Research work
+- Coursework
+- Project work
+- Custom work/project rings
+- Nine editable goals per ring
+- Daily check-ins
+- Circular monthly progress visualization
+- Ring-level analytics
+- Portfolio overview across all projects
+- Month selection and history
+- Export/import backup
 - Installable PWA support
-- Responsive mobile/desktop layout
+- Responsive mobile and desktop layout
+
+## Default rings
+- Personal Habits
+- Research Progress
+- Coursework
+- Project Work
+
+You can create more rings for papers, lab work, job tasks, competitions, fitness goals, learning plans, or other projects.
 
 ## Data storage
-The current GitHub Pages build stores data in the browser with `localStorage`.
+The current GitHub Pages version uses browser localStorage.
 
-That means:
-- tracking works immediately on a device;
-- no fake or insecure password is used;
-- phone and laptop do **not** automatically synchronize yet.
+This means each device keeps its own data. Automatic phone/laptop synchronization and account login require a backend such as Supabase.
 
-For true account login and cross-device sync, the next version should connect a backend such as Supabase.
-
-## GitHub Pages
-In the repository, open **Settings → Pages** and choose **Deploy from a branch**.
-Use:
-- Branch: `main`
-- Folder: `/ (root)`
-
-The site URL will be:
-
+## Site
 https://saitejajarabala.github.io/habit-ring/
